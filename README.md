@@ -12,6 +12,7 @@
 [![One-Way Diode](https://img.shields.io/badge/Hardware%20Diode-RX%20Enforced-cyan?style=for-the-badge)](/)
 [![Security Standard](https://img.shields.io/badge/NIST-SP%20800--82%20Compliant-blue?style=for-the-badge)](/)
 
+### Live Project: https://mirage-zeta-silk.vercel.app/
 ---
 
 ## 1. Executive Summary & The Problem Solved
