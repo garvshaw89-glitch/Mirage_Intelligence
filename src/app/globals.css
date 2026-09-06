@@ -1,0 +1,378 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────
+   MIRAGE Design System
+   Dark · Precise · Premium · Cinematic
+───────────────────────────────────────────────────────────── */
+
+@theme inline {
+  /* Color palette */
+  --color-background: #080c12;
+  --color-surface: #0d1520;
+  --color-surface-elevated: #111d2e;
+  --color-surface-glass: rgba(13, 21, 32, 0.7);
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-active: rgba(99, 179, 237, 0.3);
+
+  /* Foreground */
+  --color-foreground: #e8edf4;
+  --color-foreground-muted: rgba(232, 237, 244, 0.55);
+  --color-foreground-subtle: rgba(232, 237, 244, 0.3);
+
+  /* Accent — cool blue/cyan */
+  --color-accent: #3b9eff;
+  --color-accent-muted: rgba(59, 158, 255, 0.15);
+  --color-accent-glow: rgba(59, 158, 255, 0.25);
+  --color-cyan: #00d4ff;
+  --color-cyan-muted: rgba(0, 212, 255, 0.12);
+
+  /* Severity palette — muted, professional */
+  --color-normal: #4ade80;
+  --color-normal-muted: rgba(74, 222, 128, 0.12);
+  --color-low: #60a5fa;
+  --color-low-muted: rgba(96, 165, 250, 0.12);
+  --color-medium: #fbbf24;
+  --color-medium-muted: rgba(251, 191, 36, 0.12);
+  --color-high: #f97316;
+  --color-high-muted: rgba(249, 115, 22, 0.12);
+  --color-critical: #ef4444;
+  --color-critical-muted: rgba(239, 68, 68, 0.12);
+
+  /* Violet accent for campaigns */
+  --color-violet: #a78bfa;
+  --color-violet-muted: rgba(167, 139, 250, 0.12);
+
+  /* Typography */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --font-display: "Inter", system-ui, sans-serif;
+
+  /* Spacing */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* Glass surfaces */
+  --glass-blur: blur(20px);
+  --glass-blur-sm: blur(12px);
+}
+
+/* ─── Global Reset & Tokens ─── */
+:root {
+  --background: #080c12;
+  --foreground: #e8edf4;
+  --primary: #00d4ff;
+  --secondary: #3b9eff;
+  --destructive: #ef4444;
+  --border: rgba(255, 255, 255, 0.08);
+  --muted-foreground: rgba(232, 237, 244, 0.55);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background: #080c12;
+  color: #e8edf4;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ─── Selection ─── */
+::selection {
+  background: rgba(59, 158, 255, 0.25);
+  color: #e8edf4;
+}
+
+/* ─── Glass morphism card ─── */
+.glass {
+  background: rgba(13, 21, 32, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-lg);
+}
+
+.glass-sm {
+  background: rgba(13, 21, 32, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-md);
+}
+
+.glass-nav {
+  background: rgba(8, 12, 18, 0.85);
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ─── Gradient text ─── */
+.text-gradient {
+  background: linear-gradient(135deg, #3b9eff 0%, #00d4ff 50%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-subtle {
+  background: linear-gradient(135deg, #e8edf4 0%, rgba(232, 237, 244, 0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Glow effects ─── */
+.glow-accent {
+  box-shadow: 0 0 20px rgba(59, 158, 255, 0.15),
+              0 0 40px rgba(59, 158, 255, 0.05);
+}
+
+.glow-critical {
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.2),
+              0 0 40px rgba(239, 68, 68, 0.05);
+}
+
+/* ─── Status indicators ─── */
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.status-dot-pulse {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+/* ─── Risk severity indicators ─── */
+.severity-normal  { color: #4ade80; }
+.severity-low     { color: #60a5fa; }
+.severity-medium  { color: #fbbf24; }
+.severity-high    { color: #f97316; }
+.severity-critical { color: #ef4444; }
+
+.badge-normal   { background: rgba(74, 222, 128, 0.1);  border: 1px solid rgba(74, 222, 128, 0.25);  color: #4ade80; }
+.badge-low      { background: rgba(96, 165, 250, 0.1);  border: 1px solid rgba(96, 165, 250, 0.25);  color: #60a5fa; }
+.badge-medium   { background: rgba(251, 191, 36, 0.1);  border: 1px solid rgba(251, 191, 36, 0.25);  color: #fbbf24; }
+.badge-high     { background: rgba(249, 115, 22, 0.1);  border: 1px solid rgba(249, 115, 22, 0.25);  color: #f97316; }
+.badge-critical { background: rgba(239, 68, 68, 0.1);   border: 1px solid rgba(239, 68, 68, 0.25);   color: #ef4444; }
+
+/* ─── Risk score ring ─── */
+.risk-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Float animation ─── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ─── Fade-in animations ─── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.4s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+/* ─── Network packet flow animation ─── */
+@keyframes packet-flow {
+  0% { opacity: 0; transform: translateY(-10px); }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(10px); }
+}
+
+.animate-packet {
+  animation: packet-flow 1.5s ease-in-out infinite;
+}
+
+/* ─── Threat alert shimmer ─── */
+@keyframes threat-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .animate-float,
+  .status-dot-pulse,
+  .animate-packet {
+    animation: none !important;
+  }
+}
+
+/* ─── Typography scale ─── */
+.text-display {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.text-heading-1 { font-size: 2rem;   font-weight: 700; letter-spacing: -0.015em; }
+.text-heading-2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.01em;  }
+.text-heading-3 { font-size: 1.25rem; font-weight: 600; }
+.text-heading-4 { font-size: 1rem;   font-weight: 600; letter-spacing: 0.01em;   }
+.text-label     { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(232, 237, 244, 0.5); }
+.text-mono      { font-family: "JetBrains Mono", "Fira Code", monospace; }
+.text-data      { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 0.85rem; }
+
+/* ─── Focus states (accessibility) ─── */
+:focus-visible {
+  outline: 2px solid rgba(59, 158, 255, 0.5);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Grid overlays ─── */
+.grid-overlay {
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ─── One-way flow arrow ─── */
+.one-way-arrow {
+  background: linear-gradient(to bottom, transparent, rgba(59, 158, 255, 0.4), transparent);
+  width: 2px;
+  position: relative;
+}
+
+.one-way-arrow::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 8px solid rgba(59, 158, 255, 0.6);
+}
+
+/* ─── Responsive layout utilities ─── */
+.container-dashboard {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ─── Threat event list ─── */
+.threat-event-new {
+  animation: fade-up 0.35s ease-out forwards;
+}
+
+/* ─── Campaign alert glow ─── */
+.campaign-detected {
+  animation: campaign-pulse 2s ease-in-out infinite;
+}
+
+@keyframes campaign-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+  }
+}
+
+/* ─── Metric card hover ─── */
+.metric-card {
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.metric-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(59, 158, 255, 0.2);
+}
+
+/* ─── Table row hover ─── */
+.table-row-hover {
+  transition: background 0.15s ease;
+}
+.table-row-hover:hover {
+  background: rgba(59, 158, 255, 0.04);
+}
+
+/* ─── Skeleton loading ─── */
+@keyframes skeleton-shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.04) 25%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(255,255,255,0.04) 75%
+  );
+  background-size: 200px 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+  border-radius: 4px;
+}

@@ -1,0 +1,65 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: mirage-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: mirage
+      POSTGRES_USER: mirage_app
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-mirage_secure_pass_2026}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/db/postgres_schema.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    networks:
+      - enclave_internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mirage_app -d mirage"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend.Dockerfile
+    container_name: mirage-backend
+    restart: unless-stopped
+    environment:
+      ENVIRONMENT: production
+      DATABASE_URL: postgresql+asyncpg://mirage_app:${DB_PASSWORD:-mirage_secure_pass_2026}@postgres:5432/mirage
+      SECRET_KEY: ${SECRET_KEY:-mirage_super_secret_production_key_2026}
+      CORS_ORIGINS: '["http://localhost:3000","http://frontend:3000"]'
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - enclave_internal
+      - frontend_net
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend.Dockerfile
+    container_name: mirage-frontend
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000/api/v1
+      NEXT_PUBLIC_WS_URL: ws://localhost:8000/ws/live
+    depends_on:
+      - backend
+    networks:
+      - frontend_net
+    ports:
+      - "3000:3000"
+
+networks:
+  enclave_internal:
+    driver: bridge
+    internal: true # Air-gapped database network
+  frontend_net:
+    driver: bridge
+
+volumes:
+  postgres_data:

@@ -1,0 +1,55 @@
+# CodeRabbit Configuration for MIRAGE
+# Multi-resolution Intelligent Risk & Adaptive Graph Engine
+# Problem Statement ID: 26145 · NTRO Cybersecurity Architecture
+
+version: "2"
+language: "en-US"
+tone_instructions: "Be rigorous, constructive, and security-focused. Prioritize memory safety, unidirectional network isolation, async performance, and architectural consistency."
+
+reviews:
+  profile: "assertive"
+  request_changes_workflow: true
+  high_level_summary: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
+  auto_review:
+    enabled: true
+    drafts: false
+    base_branches:
+      - "main"
+      - "master"
+      - "develop"
+
+chat:
+  auto_reply: true
+
+path_filters:
+  - "!**/node_modules/**"
+  - "!**/.next/**"
+  - "!**/.venv/**"
+  - "!**/__pycache__/**"
+  - "!**/*.pyc"
+  - "!**/.pytest_cache/**"
+  - "!**/package-lock.json"
+  - "!**/*.db"
+  - "!**/*.sqlite"
+  - "!**/*.mp4"
+  - "!**/*.png"
+  - "!**/*.jpg"
+  - "!**/dribbble_ref.mp4"
+
+instructions:
+  - path: "backend/**"
+    instructions: |
+      - Ensure strict adherence to PEP 8, type annotations, and async best practices (FastAPI, AsyncSession, asyncio).
+      - Maintain the strict one-way diode TAP isolation principle: the backend must NEVER open reverse outbound communication back to monitored hosts.
+      - Ensure bounded queue sizes to prevent denial-of-service memory exhaustion during high-throughput packet bursts.
+      - Ensure Shannon entropy and Welford variance computations handle zero divisions and edge cases gracefully.
+
+  - path: "src/**"
+    instructions: |
+      - Adhere to React 19 and Next.js App Router idioms. Client components must be explicitly marked with 'use client'.
+      - Ensure Three.js WebGL and canvas resources are properly disposed of on unmount to prevent GPU memory leaks.
+      - Verify Tailwind CSS v4 and Framer Motion accessibility: always support 'prefers-reduced-motion' fallbacks.
+      - Ensure TypeScript types are strictly typed without unnecessary 'any' casts.
