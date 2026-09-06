@@ -1,4 +1,4 @@
-# MIRAGE Intelligence
+# MIRAGE INTELLIGENCE
 ## Multi-resolution Intelligent Risk & Adaptive Graph Engine
 ### Smart India Hackathon 2026 · Problem Statement ID: 26145
 **Organization:** National Technical Research Organisation (NTRO)  
